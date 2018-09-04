@@ -41,26 +41,53 @@ function shuffle(array) {
 * @description: add event listener to all the cards alowing the card to be flipped when it's cklicked. Only open two cards at the time.
 */
 
+
 let cardsClicked = [];
 const cards = document.querySelectorAll('.card');
 
 for (const card of cards){
   card.addEventListener('click', function(){
+
     // if two cards are clicked
-    if(cardsClicked.length >= 2){
-      cardsClicked[0].classList.remove('open', 'show');
-      cardsClicked[1].classList.remove('open', 'show');
+    if(cardsClicked.length === 1){
+      cardsClicked.push(card);
+      checkMatch(cardsClicked);
       cardsClicked = [];
       card.classList.add('open', 'show');
-      console.log(cardsClicked);
+
+      //console.log(cardsClicked);
       cardsClicked.push(card);
       }
       // if one card is clicked
     else{
+
       card.classList.add('open', 'show');
       cardsClicked.push(card);
-      console.log(cardsClicked);
+      //console.log(cardsClicked);
     }
 
 });
+}
+
+/*
+
+* @description: Checks both cards for a match. If matched, it assigns the class 'match'
+to both cards.If there is no match, classes 'open' and 'show' are removed
+@param {array} cardsClicked - list of the cards that is clicked
+
+*/
+
+function checkMatch(allCards){
+let firstCard = allCards[0].firstElementChild.classList[1];
+let secondCard = allCards[1].firstElementChild.classList[1];
+if( firstCard === secondCard){
+  allCards[0].classList.add('match');
+  allCards[1].classList.add('match');
+
+
+}
+else{
+  cardsClicked[0].classList.remove('open', 'show');
+  cardsClicked[1].classList.remove('open', 'show');
+}
 }
