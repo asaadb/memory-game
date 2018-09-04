@@ -35,9 +35,32 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+/*
+* @description: add event listener to all the cards alowing the card to be flipped when it's cklicked. Only open two cards at the time.
+*/
+
+let cardsClicked = [];
 const cards = document.querySelectorAll('.card');
+
 for (const card of cards){
   card.addEventListener('click', function(){
-    card.classList.add('open', 'show');
+    // if two cards are clicked
+    if(cardsClicked.length >= 2){
+      cardsClicked[0].classList.remove('open', 'show');
+      cardsClicked[1].classList.remove('open', 'show');
+      cardsClicked = [];
+      card.classList.add('open', 'show');
+      console.log(cardsClicked);
+      cardsClicked.push(card);
+      }
+      // if one card is clicked
+    else{
+      card.classList.add('open', 'show');
+      cardsClicked.push(card);
+      console.log(cardsClicked);
+    }
+
 });
 }
