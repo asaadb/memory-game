@@ -41,7 +41,7 @@ function shuffle(array) {
 * @description: add event listener to all the cards alowing the card to be flipped when it's cklicked. Only open two cards at the time.
 */
 
-
+let matches = [];
 let cardsClicked = [];
 const cards = document.querySelectorAll('.card');
 
@@ -54,19 +54,17 @@ for (const card of cards){
       checkMatch(cardsClicked);
       cardsClicked = [];
       card.classList.add('open', 'show');
-
       //console.log(cardsClicked);
       cardsClicked.push(card);
-      }
+    }
       // if one card is clicked
     else{
-
       card.classList.add('open', 'show');
       cardsClicked.push(card);
       //console.log(cardsClicked);
     }
 
-});
+  });
 }
 
 /*
@@ -78,16 +76,35 @@ to both cards.If there is no match, classes 'open' and 'show' are removed
 */
 
 function checkMatch(allCards){
-let firstCard = allCards[0].firstElementChild.classList[1];
-let secondCard = allCards[1].firstElementChild.classList[1];
-if( firstCard === secondCard){
+  let firstCard = allCards[0].firstElementChild.classList[1];
+  let secondCard = allCards[1].firstElementChild.classList[1];
+  if( firstCard === secondCard){
   allCards[0].classList.add('match');
   allCards[1].classList.add('match');
+  //if the cards is not in the matches array, add it.
+  if (!matches.includes(firstCard)){
+    matches.push(firstCard);
+    //console.log(matches);
+    matchesCompleted();
+  }
 
 
 }
-else{
-  cardsClicked[0].classList.remove('open', 'show');
-  cardsClicked[1].classList.remove('open', 'show');
+
+  else{
+    cardsClicked[0].classList.remove('open', 'show');
+    cardsClicked[1].classList.remove('open', 'show');
+  }
 }
+
+/*
+
+* @description: Checks matches array to see if the game is completed
+
+*/
+
+function matchesCompleted(){
+  if(matches.length >= 8){
+    alert('game is over');
+  }
 }
