@@ -41,29 +41,31 @@ function shuffle(array) {
 * @description: add event listener to all the cards alowing the card to be flipped when it's cklicked. Only open two cards at the time.
 */
 
-let matches = [];
+let matches = []; // to track the number of matched cards
 let cardsClicked = [];
 const cards = document.querySelectorAll('.card');
 
 for (const card of cards){
+
   card.addEventListener('click', function(){
-
-    // if two cards are clicked
-    if(cardsClicked.length === 1){
+    if (!card.classList.contains('open')){
       cardsClicked.push(card);
-      checkMatch(cardsClicked);
-      cardsClicked = [];
       card.classList.add('open', 'show');
-      //console.log(cardsClicked);
-      cardsClicked.push(card);
-    }
-      // if one card is clicked
-    else{
-      card.classList.add('open', 'show');
-      cardsClicked.push(card);
-      //console.log(cardsClicked);
-    }
+      // if two cards are clicked
+      if(cardsClicked.length === 2){
 
+      setTimeout(function (){
+        for (const open of cardsClicked){
+          checkMatch(cardsClicked);
+          open.classList.remove('open', 'show');
+
+    }
+    cardsClicked = [];
+  }, 600);
+      //  checkMatch(cardsClicked);
+
+    }
+  }
   });
 }
 
@@ -78,24 +80,19 @@ to both cards.If there is no match, classes 'open' and 'show' are removed
 function checkMatch(allCards){
   let firstCard = allCards[0].firstElementChild.classList[1];
   let secondCard = allCards[1].firstElementChild.classList[1];
-  if( firstCard === secondCard){
-  allCards[0].classList.add('match');
-  allCards[1].classList.add('match');
-  //if the cards is not in the matches array, add it.
-  if (!matches.includes(firstCard)){
-    matches.push(firstCard);
-    //console.log(matches);
-    matchesCompleted();
-  }
 
+  if( firstCard === secondCard ){
+    allCards[0].classList.add('match');
+    allCards[1].classList.add('match');
+    //if the cards is not in the matches array, add it.
+    if (!matches.includes(firstCard)){
+        matches.push(firstCard);
+        matchesCompleted();
+  }
+}
 
 }
 
-  else{
-    cardsClicked[0].classList.remove('open', 'show');
-    cardsClicked[1].classList.remove('open', 'show');
-  }
-}
 
 /*
 
@@ -104,7 +101,10 @@ function checkMatch(allCards){
 */
 
 function matchesCompleted(){
-  if(matches.length >= 8){
+  console.log(matches)
+ if(matches.length >= 8){
+   setTimeout(function(){
     alert('game is over');
+  },700);
   }
 }
