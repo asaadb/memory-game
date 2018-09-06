@@ -43,30 +43,36 @@ function shuffle(array) {
 
 let matches = []; // to track the number of matched cards
 let cardsClicked = [];
+let moves = 0; // tracks the number of moves
 const cards = document.querySelectorAll('.card');
 
 for (const card of cards){
 
   card.addEventListener('click', function(){
-    if (!card.classList.contains('open')){
-      cardsClicked.push(card);
-      card.classList.add('open', 'show');
-      // if two cards are clicked
-      if(cardsClicked.length === 2){
 
-      setTimeout(function (){
-        for (const open of cardsClicked){
-          checkMatch(cardsClicked);
-          open.classList.remove('open', 'show');
-
-    }
-    cardsClicked = [];
-  }, 600);
+    //check if the card is already in the matches list
+    if(!matches.includes(card.firstElementChild.classList[1])){
+      if (!card.classList.contains('open')){
+        cardsClicked.push(card);
+        card.classList.add('open', 'show');
+        // if two cards are clicked
+        if(cardsClicked.length === 2){
+          moves++;
+          console.log(moves);
+          // add the move to the html
+          document.querySelector('.moves').textContent = moves;
+          setTimeout(function (){
+            for (const open of cardsClicked){
+              checkMatch(cardsClicked);
+              open.classList.remove('open', 'show');
+            }
+            cardsClicked = [];
+          }, 600);
       //  checkMatch(cardsClicked);
 
     }
   }
-  });
+}});
 }
 
 /*
@@ -80,13 +86,15 @@ to both cards.If there is no match, classes 'open' and 'show' are removed
 function checkMatch(allCards){
   let firstCard = allCards[0].firstElementChild.classList[1];
   let secondCard = allCards[1].firstElementChild.classList[1];
+  if (!matches.includes(firstCard)){
 
-  if( firstCard === secondCard ){
-    allCards[0].classList.add('match');
-    allCards[1].classList.add('match');
-    //if the cards is not in the matches array, add it.
-    if (!matches.includes(firstCard)){
+      if( firstCard === secondCard ){
+        allCards[0].classList.add('match');
+        allCards[1].classList.add('match');
         matches.push(firstCard);
+    //if the cards is not in the matches array, add it.
+
+
         matchesCompleted();
   }
 }
