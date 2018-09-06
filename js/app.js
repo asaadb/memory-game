@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+let initialCards =["fa-diamond","fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond","fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -23,6 +23,7 @@ function shuffle(array) {
 
     return array;
 }
+
 
 
 /*
@@ -76,11 +77,9 @@ for (const card of cards){
 }
 
 /*
-
 * @description: Checks both cards for a match. If matched, it assigns the class 'match'
 to both cards.If there is no match, classes 'open' and 'show' are removed
-@param {array} cardsClicked - list of the cards that is clicked
-
+*@param {array} cardsClicked - list of the cards that is clicked
 */
 
 function checkMatch(allCards){
@@ -103,9 +102,7 @@ function checkMatch(allCards){
 
 
 /*
-
 * @description: Checks matches array to see if the game is completed
-
 */
 
 function matchesCompleted(){
@@ -116,3 +113,26 @@ function matchesCompleted(){
   },700);
   }
 }
+
+/*
+* @description: restrat the game when the restrat button is clicked. set everything back to the start point and shuffle the cards
+*/
+function restart(){
+  for (const num of cards){
+    num.classList.remove('open', 'show', 'match');
+    moves = 0;
+    matches = [];
+    cardsClicked = [];
+    document.querySelector('.moves').textContent = moves;
+  }
+  let newCards = shuffle(initialCards);
+  for (let i = 0 ; i<newCards.length; i++){
+    cards[i].firstElementChild.className = `fa ${newCards[i]}`;
+    console.log(cards[i].firstElementChild.classList[1]);
+  }
+
+}
+
+//add event listener to the restart button
+const restartBtn = document.querySelector('.fa-repeat');
+restartBtn.addEventListener('click', restart);
