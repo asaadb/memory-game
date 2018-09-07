@@ -45,6 +45,7 @@ function shuffle(array) {
 let matches = []; // to track the number of matched cards
 let cardsClicked = [];
 let moves = 0; // tracks the number of moves
+let wrongGuesses = 0;
 const cards = document.querySelectorAll('.card');
 
 for (const card of cards){
@@ -59,7 +60,7 @@ for (const card of cards){
         // if two cards are clicked
         if(cardsClicked.length === 2){
           moves++;
-          console.log(moves);
+          //console.log(moves);
           // add the move to the html
           document.querySelector('.moves').textContent = moves;
           setTimeout(function (){
@@ -67,6 +68,8 @@ for (const card of cards){
               checkMatch(cardsClicked);
               open.classList.remove('open', 'show');
             }
+
+            checkWrongGuess();
             cardsClicked = [];
           }, 600);
       //  checkMatch(cardsClicked);
@@ -96,8 +99,26 @@ function checkMatch(allCards){
 
         matchesCompleted();
   }
+  else{
+    wrongGuesses++;
+    console.log("wrong " + wrongGuesses);
+  }
 }
 
+}
+
+/*
+* @description: checks how many wrong guesses were made and update the star rating
+*/
+
+function checkWrongGuess(){
+
+  if (wrongGuesses >= 6 && wrongGuesses <= 14){
+    document.getElementById('star3').className = 'fa fa-star-o';
+  }
+  if(wrongGuesses > 14){
+    document.getElementById('star2').className = 'fa fa-star-o';
+  }
 }
 
 
@@ -106,7 +127,7 @@ function checkMatch(allCards){
 */
 
 function matchesCompleted(){
-  console.log(matches)
+  //console.log(matches)
  if(matches.length >= 8){
    setTimeout(function(){
     alert('game is over');
@@ -117,18 +138,24 @@ function matchesCompleted(){
 /*
 * @description: restrat the game when the restrat button is clicked. set everything back to the start point and shuffle the cards
 */
+
 function restart(){
+  moves = 0;
+  matches = [];
+  cardsClicked = [];
+  wrongGuesses = 0;
+  document.getElementById('star3').className = 'fa fa-star';
+  document.getElementById('star2').className = 'fa fa-star';
   for (const num of cards){
     num.classList.remove('open', 'show', 'match');
-    moves = 0;
-    matches = [];
-    cardsClicked = [];
+
     document.querySelector('.moves').textContent = moves;
   }
+  //const stars = document.querySelectorAll('')
   let newCards = shuffle(initialCards);
   for (let i = 0 ; i<newCards.length; i++){
     cards[i].firstElementChild.className = `fa ${newCards[i]}`;
-    console.log(cards[i].firstElementChild.classList[1]);
+    //console.log(cards[i].firstElementChild.classList[1]);
   }
 
 }
