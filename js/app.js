@@ -46,6 +46,7 @@ let matches = []; // to track the number of matched cards
 let cardsClicked = [];
 let moves = 0; // tracks the number of moves
 let wrongGuesses = 0;
+
 const cards = document.querySelectorAll('.card');
 
 for (const card of cards){
@@ -60,6 +61,7 @@ for (const card of cards){
         // if two cards are clicked
         if(cardsClicked.length === 2){
           moves++;
+
           //console.log(moves);
           // add the move to the html
           document.querySelector('.moves').textContent = moves;
@@ -78,6 +80,7 @@ for (const card of cards){
   }
 }});
 }
+
 
 /*
 * @description: Checks both cards for a match. If matched, it assigns the class 'match'
@@ -101,7 +104,7 @@ function checkMatch(allCards){
   }
   else{
     wrongGuesses++;
-    console.log("wrong " + wrongGuesses);
+
   }
 }
 
@@ -128,10 +131,25 @@ function checkWrongGuess(){
 
 function matchesCompleted(){
   //console.log(matches)
- if(matches.length >= 8){
-   setTimeout(function(){
-    alert('game is over');
-  },700);
+  if(matches.length >= 8){
+    setTimeout(function(){
+      //get the final results
+      let finalMoves = document.querySelector('.moves').textContent;
+      let finalStars = document.querySelectorAll('.fa-star');
+      let finalTime = document.querySelector('.timer').textContent;
+      //fire the popup
+      swal({
+        title: "Good job! You won!",
+        text: `With ${finalMoves} moves
+        Your time: ${finalTime}
+        Rating: ${finalStars.length} stars`,
+        icon: "success",
+        button: "Play again",
+      })
+      //restart the game
+      .then((will) => restart());
+
+    },700);
   }
 }
 
@@ -159,6 +177,33 @@ function restart(){
   }
 
 }
+restart();
+
+/*
+* @description: the game timer
+*/
+let timer = document.querySelector('.timer');
+let min = 0;
+let sec = 0;
+let hr = 0;
+function timing(){
+  setInterval(function(){
+    timer.textContent = `${hr}.${min}.${sec}`;
+    sec++;
+    if (sec >= 60){
+      sec = 0;
+      min++;
+    }
+    if (min >= 60){
+      min = 0;
+      hr++;
+    }
+  },1000);
+}
+
+// add event listener to start the timer
+let decks = document.querySelector('body');
+//decks.addEventListener('click',timing);
 
 //add event listener to the restart button
 const restartBtn = document.querySelector('.fa-repeat');
