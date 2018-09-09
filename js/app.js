@@ -23,9 +23,15 @@ function shuffle(array) {
 
     return array;
 }
-
-
-
+const cards = document.querySelectorAll('.card');
+// suffle and update the cards
+function startGame(){
+  let newCards = shuffle(initialCards);
+  for (let i = 0 ; i<newCards.length; i++){
+    cards[i].firstElementChild.className = `fa ${newCards[i]}`;
+  }
+}
+window.onload = startGame();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -43,11 +49,10 @@ function shuffle(array) {
 */
 
 let matches = []; // to track the number of matched cards
-let cardsClicked = [];
-let moves = 0; // tracks the number of moves
-let wrongGuesses = 0;
+let cardsClicked = []; //to track the cards that were clicked
+let moves = 0; // to track the number of moves
+let wrongGuesses = 0; //to tracke wrong guesses
 
-const cards = document.querySelectorAll('.card');
 
 for (const card of cards){
 
@@ -58,13 +63,18 @@ for (const card of cards){
       if (!card.classList.contains('open')){
         cardsClicked.push(card);
         card.classList.add('open', 'show');
-        // if two cards are clicked
+        // fisrt cklick strats the timer
+        moves++;
+        if(moves === 1){
+          timing();
+        }
         if(cardsClicked.length === 2){
-          moves++;
 
-          //console.log(moves);
+
           // add the move to the html
-          document.querySelector('.moves').textContent = moves;
+          if(moves%2 === 0){
+          document.querySelector('.moves').textContent = moves/2;
+        }
           setTimeout(function (){
             for (const open of cardsClicked){
               checkMatch(cardsClicked);
@@ -74,8 +84,6 @@ for (const card of cards){
             checkWrongGuess();
             cardsClicked = [];
           }, 600);
-      //  checkMatch(cardsClicked);
-
     }
   }
 }});
@@ -116,14 +124,65 @@ function checkMatch(allCards){
 
 function checkWrongGuess(){
 
-  if (wrongGuesses >= 6 && wrongGuesses <= 14){
+  if (wrongGuesses >= 8 && wrongGuesses <= 16){
     document.getElementById('star3').className = 'fa fa-star-o';
   }
-  if(wrongGuesses > 14){
+  if(wrongGuesses > 16){
     document.getElementById('star2').className = 'fa fa-star-o';
   }
 }
 
+/*
+* @description: the game timer
+*/
+
+let timer = document.querySelector('.timer');
+let min = 0;
+let sec = 0;
+let hr = 0;
+//function timing(){
+function timing() {
+  setInterval(function(){
+    timer.textContent = `${hr}.${min}.${sec}`;
+    sec++;
+    if (sec >= 60){
+      sec = 0;
+      min++;
+    }
+    if (min >= 60){
+      min = 0;
+      hr++;
+    }
+  },1000);
+}
+
+/*
+* @description: restrat the game when the restrat button is clicked. set everything back to the start point and shuffle the cards
+*/
+
+function restart(){
+  moves = 0;
+  matches = [];
+  cardsClicked = [];
+  wrongGuesses = 0;
+  // reset the rating
+  document.getElementById('star3').className = 'fa fa-star';
+  document.getElementById('star2').className = 'fa fa-star';
+  for (const num of cards){
+
+    num.classList.remove('open', 'show', 'match');
+    document.querySelector('.moves').textContent = moves;
+
+  }
+  //new shuffle
+  startGame();
+}
+
+//decks.addEventListener('click',timing);
+
+//add event listener to the restart button
+const restartBtn = document.querySelector('.fa-repeat');
+restartBtn.addEventListener('click', restart);
 
 /*
 * @description: Checks matches array to see if the game is completed
@@ -152,59 +211,3 @@ function matchesCompleted(){
     },700);
   }
 }
-
-/*
-* @description: restrat the game when the restrat button is clicked. set everything back to the start point and shuffle the cards
-*/
-
-function restart(){
-  moves = 0;
-  matches = [];
-  cardsClicked = [];
-  wrongGuesses = 0;
-  document.getElementById('star3').className = 'fa fa-star';
-  document.getElementById('star2').className = 'fa fa-star';
-  for (const num of cards){
-    num.classList.remove('open', 'show', 'match');
-
-    document.querySelector('.moves').textContent = moves;
-  }
-  //const stars = document.querySelectorAll('')
-  let newCards = shuffle(initialCards);
-  for (let i = 0 ; i<newCards.length; i++){
-    cards[i].firstElementChild.className = `fa ${newCards[i]}`;
-    //console.log(cards[i].firstElementChild.classList[1]);
-  }
-
-}
-restart();
-
-/*
-* @description: the game timer
-*/
-let timer = document.querySelector('.timer');
-let min = 0;
-let sec = 0;
-let hr = 0;
-function timing(){
-  setInterval(function(){
-    timer.textContent = `${hr}.${min}.${sec}`;
-    sec++;
-    if (sec >= 60){
-      sec = 0;
-      min++;
-    }
-    if (min >= 60){
-      min = 0;
-      hr++;
-    }
-  },1000);
-}
-
-// add event listener to start the timer
-let decks = document.querySelector('body');
-//decks.addEventListener('click',timing);
-
-//add event listener to the restart button
-const restartBtn = document.querySelector('.fa-repeat');
-restartBtn.addEventListener('click', restart);
