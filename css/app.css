@@ -80,6 +80,7 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    animation: pulse 0.6s;
 }
 
 /*
@@ -118,10 +119,7 @@ h1 {
 */
 
 .deck .card.wrong {
-  animation: shake 0.7s;
-  animation-iteration-count: 5s;
-  animation duration: 5s;
-
+  animation: shake 0.6s;
 }
 
 /*
@@ -152,6 +150,20 @@ h1 {
   100% { transform: translate(1px, -2px) rotate(-1deg);
       background-color: #E50000; font-size:33px; }
 }
+
+/*
+* pulse animation
+*/
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/*
+* media query
+*/
 
 @media screen and (max-width:697px){
   .deck{

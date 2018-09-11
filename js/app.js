@@ -119,7 +119,7 @@ function cardFlip() {
     //check wrong matches
     checkWrongGuess();
     cardsClicked = [];
-  }, 600);
+  }, 700);
 }
 
 /*
