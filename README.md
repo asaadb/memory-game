@@ -1,9 +1,9 @@
 # Memory Game Project
-This is browser-based card matching game (also known as Concentration).
+This is a browser-based card matching game (also known as Concentration).
 
 ## Instructions
 
-### Getting Started
+### How to Play
 The card matching game is a simple game. Once you click on a card, the card flips showing its content. You flip two cards to look for a match. If the cards match, they will stay open otherwise they will flip back. You win the game when you find all matches.
 
 ### Score Panel
