@@ -48,31 +48,32 @@ let cardsClicked = [];
 let moves = 0;
  //to tracke wrong guesses
 let wrongGuesses = 0;
-
-
+// to lock the board when two cards are flipped
+let lock = false;
 //Loop over all the cards to add evet listerners
 for (const card of cards){
 
   card.addEventListener('click', function(){
-
+    if (lock === false){
     //check if the card is already in the matches list
-    if(!matches.includes(card.firstElementChild.classList[1])){
+      if(!matches.includes(card.firstElementChild.classList[1])){
       //check if the card is already open
-      if (!card.classList.contains('open')){
-        moves++;
-        // start the timer on the first move
-        startTimer();
-        //add to the cardsClicked list
-        cardsClicked.push(card);
-        //show the card
-        card.classList.add('open', 'show');
-        //if two cards are open
-        if(cardsClicked.length === 2){
-          // add the move to the html
-
-          addMove(moves);
-          //check and flip
-          cardFlip();
+        if (!card.classList.contains('open')){
+          moves++;
+          // start the timer on the first move
+          startTimer();
+          //add to the cardsClicked list
+          cardsClicked.push(card);
+          //show the card
+          card.classList.add('open', 'show');
+          //if two cards are open
+          if(cardsClicked.length === 2){
+            // lock the board
+            lock = true;
+            addMove(moves);
+            //check and flip
+            cardFlip();
+          }
         }
       }
     }
@@ -84,6 +85,7 @@ for (const card of cards){
 */
 
 function startTimer(){
+
   if(moves === 1){
     timing();
   }
@@ -154,6 +156,8 @@ function checkMatch(allCards){
           allCards[1].classList.remove('wrong');
         },700);
       }
+      //unlock the board
+      lock = false;
   }
 }
 
@@ -184,6 +188,7 @@ let watchInterval;
 function timing() {
 
   watchInterval = setInterval(function(){
+    
     timer.textContent = `${min} min:${sec} sec`;
     sec++;
     if (sec >= 60){
