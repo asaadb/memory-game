@@ -36,10 +36,6 @@ function startGame(){
 //shuffle cards onload
 window.onload = startGame();
 
-/*
-* @description: add event listener to all the cards alowing the card to be flipped when it's cklicked. Only open two cards at the time.
-*/
-
 // to track the number of matched cards
 let matches = [];
 //to track the cards that were clicked
@@ -51,6 +47,11 @@ let wrongGuesses = 0;
 // to lock the board when two cards are flipped
 let lock = false;
 //Loop over all the cards to add evet listerners
+
+/*
+* @description: add event listener to all the cards alowing the card to be flipped when it's cklicked. Only open two cards at the time.
+*/
+
 for (const card of cards){
 
   card.addEventListener('click', function(){
@@ -67,17 +68,26 @@ for (const card of cards){
           //show the card
           card.classList.add('open', 'show');
           //if two cards are open
-          if(cardsClicked.length === 2){
-            // lock the board
-            lock = true;
-            addMove(moves);
-            //check and flip
-            cardFlip();
-          }
+          twoCards();
         }
       }
     }
   });
+}
+
+/*
+* @description: check if two cards were flipped
+*/
+
+function twoCards(){
+
+  if(cardsClicked.length === 2){
+    // lock the board
+    lock = true;
+    addMove(moves);
+    //check and flip
+    cardFlip();
+  }
 }
 
 /*
@@ -108,7 +118,6 @@ function cardFlip() {
     }
     //check wrong matches
     checkWrongGuess();
-
     cardsClicked = [];
   }, 600);
 }
@@ -120,7 +129,6 @@ function cardFlip() {
 
 function addMove(moves){
   //check if two cards are flipped to count for one move
-
   if(moves%2 === 0){
     document.querySelector('.moves').textContent = moves/2;
   }
@@ -137,7 +145,6 @@ function checkMatch(allCards){
   let firstCard = allCards[0].firstElementChild.classList[1];
   let secondCard = allCards[1].firstElementChild.classList[1];
   if (!matches.includes(firstCard)){
-
       if( firstCard === secondCard ){
         allCards[0].classList.add('match');
         allCards[1].classList.add('match');
@@ -175,9 +182,7 @@ function checkWrongGuess(){
   }
 }
 
-/*
-* @description: the game timer
-*/
+
 
 let timer = document.querySelector('.timer');
 let min = 0;
@@ -185,10 +190,14 @@ let sec = 0;
 let hr = 0;
 let watchInterval;
 
+/*
+* @description: the game timer
+*/
+
 function timing() {
 
   watchInterval = setInterval(function(){
-    
+
     timer.textContent = `${min} min:${sec} sec`;
     sec++;
     if (sec >= 60){
