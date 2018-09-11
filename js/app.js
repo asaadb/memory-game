@@ -102,9 +102,11 @@ function cardFlip() {
       checkMatch(cardsClicked);
       //remove show and open from the two cards
       open.classList.remove('open', 'show');
+
     }
     //check wrong matches
     checkWrongGuess();
+
     cardsClicked = [];
   }, 600);
 }
@@ -116,6 +118,7 @@ function cardFlip() {
 
 function addMove(moves){
   //check if two cards are flipped to count for one move
+
   if(moves%2 === 0){
     document.querySelector('.moves').textContent = moves/2;
   }
@@ -141,7 +144,15 @@ function checkMatch(allCards){
         matchesCompleted();
       }
       else{
+        allCards[0].classList.add('wrong');
+        allCards[1].classList.add('wrong');
         wrongGuesses++;
+        //add animation
+        setTimeout(function(){
+
+          allCards[0].classList.remove('wrong');
+          allCards[1].classList.remove('wrong');
+        },700);
       }
   }
 }
@@ -152,10 +163,10 @@ function checkMatch(allCards){
 
 function checkWrongGuess(){
 
-  if (wrongGuesses >= 12 && wrongGuesses <= 20){
+  if (wrongGuesses >= 14 && wrongGuesses <= 24){
     document.getElementById('star3').className = 'fa fa-star-o';
   }
-  if(wrongGuesses > 20){
+  if(wrongGuesses > 24){
     document.getElementById('star2').className = 'fa fa-star-o';
   }
 }
