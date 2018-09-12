@@ -1,18 +1,29 @@
 # Memory Game Project
 This is a browser-based card matching game (also known as Concentration).
+![snippet](img/snippet.png)
 
-## Instructions
+## Installing
+You can run and play this game by cloning this project via GitHub to your own device and open the index.html file.
 
-### How to Play
-The card matching game is a simple game. Once you click on a card, the card flips showing its content. You flip two cards to look for a match. If the cards match, they will stay open otherwise they will flip back. You win the game when you find all matches.
+
+## Challenge
+Match all the cards in with fewer moves in less time.
+
+## How to Play
+
+### Instructions
+* Click on any card
+* Keep flipping and revealing cards and work on remembering them.
+* Match cards fast with fewer moves
 
 ### Score Panel
 The score panel of this game consist of three parts:
--Rating: which consists of three stars. The more mismatches the lower the number of stars.
--timer: once yo start the game, a timer will start recording the game time and stops once you finish the game. The timer will reset when restart the game.
-When you win the game a congrats modal will appear showing your score.
+* Rating: which consists of three stars. The more mismatches the lower the number of stars.
+* Timer: once you start the game, a timer will start recording the game time and stops when you finish the game.
+* Rest Button: to reset the game
 
 
-
-## Authors
-Asaad Budayr
+##Dependencies
+* #### [Google Fonts] (https://fonts.google.com)
+* #### [Font Awesome] (https://fontawesome.com/)
+* #### [Sweet Alert] (https://sweetalert.js.org/guides/)
