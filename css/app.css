@@ -162,35 +162,60 @@ h1 {
 }
 
 /*
-* media query
+* media queries
 */
 
-@media screen and (max-width:697px){
-  .deck{
+@media screen and (max-width: 697px) {
+  .deck {
     width: 86%;
-
   }
 
-  .deck .card{
-    width:6rem;
-    height:6rem;
-    margin-right:1rem;
+  .deck .card {
+    width: 6rem;
+    height: 6rem;
+    margin-right: 1rem;
   }
 }
 
-@media screen and (max-width:600px){
-  .deck{
-    width: 86%;
-
+@media screen and (max-width: 600px) {
+  .deck {
+    min-height: 620px;
   }
 
-  .deck .card{
-    width:4.5rem;
-    height:4.5rem;
-    margin-right:1rem;
+  .deck .card {
+    width: 5rem;
+    height: 5rem;
+    margin-right: 1rem;
   }
 
   .deck .card.show {
       font-size: 23px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .score-panel {
+    width: 85%;
+  }
+
+  .deck {
+    padding: 30px;
+    width: 90%;
+  }
+
+  .deck .card {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .deck .card {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+
+  .deck .card.show {
+      font-size: 20px;
   }
 }
