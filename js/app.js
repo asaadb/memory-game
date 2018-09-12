@@ -247,7 +247,7 @@ restartBtn.addEventListener("click", restart);
 */
 
 function matchesCompleted() {
-  if (matches.length >= 8) {
+  if (matches.length === 8) {
     setTimeout(function() {
       //stop the timer
       clearInterval(watchInterval);
