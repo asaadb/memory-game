@@ -1,13 +1,13 @@
 # Memory Game Project
 This is a browser-based card matching game (also known as Concentration).
-![snippet](img/snippet.png)
+![snippet](img/snippet.PNG)
 
 ## Installing
 You can run and play this game by cloning this project via GitHub to your own device and open the index.html file.
 
 
 ## Challenge
-Match all the cards in with fewer moves in less time.
+Match all the cards with fewer moves in less time.
 
 ## How to Play
 
@@ -23,7 +23,7 @@ The score panel of this game consist of three parts:
 * Rest Button: to reset the game
 
 
-##Dependencies
+## Dependencies
 * #### [Google Fonts] (https://fonts.google.com)
 * #### [Font Awesome] (https://fontawesome.com/)
 * #### [Sweet Alert] (https://sweetalert.js.org/guides/)
