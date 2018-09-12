@@ -5,7 +5,6 @@ This is a browser-based card matching game (also known as Concentration).
 ## Installing
 You can run and play this game by cloning this project via GitHub to your own device and open the index.html file.
 
-
 ## Challenge
 Match all the cards with fewer moves in less time.
 
@@ -23,7 +22,11 @@ The score panel of this game consist of three parts:
 * Rest Button: to reset the game
 
 
+<<<<<<< HEAD
 ## Dependencies
+=======
+##Dependencies
+>>>>>>> 9db55dea56944848982049e1cf43c2b668040cff
 * #### [Google Fonts] (https://fonts.google.com)
 * #### [Font Awesome] (https://fontawesome.com/)
 * #### [Sweet Alert] (https://sweetalert.js.org/guides/)
