@@ -3,7 +3,8 @@ This is a browser-based card matching game (also known as Concentration).
 ![snippet](img/snippet.PNG)
 
 ## Installing
-You can run and play this game by cloning this project via GitHub to your own device and open the index.html file.
+* Load this link https://asaadb.github.io/memory-game/ on your browser to play the game live
+* Or you can run and play this game by cloning this project via GitHub to your own device and open the index.html file.
 
 ## Challenge
 Match all the cards with fewer moves in less time.
@@ -22,6 +23,6 @@ The score panel of this game consist of three parts:
 * Rest Button: to reset the game
 
 ## Dependencies
-* #### [Google Fonts] (https://fonts.google.com)
-* #### [Font Awesome] (https://fontawesome.com/)
-* #### [Sweet Alert] (https://sweetalert.js.org/guides/)
+* [Google Fonts](https://fonts.google.com)
+* [Font Awesome](https://fontawesome.com/)
+* [Sweet Alert](https://sweetalert.js.org/guides/)
